@@ -31,10 +31,9 @@ namespace UserMaintenance
         {
             this.listUsers = new System.Windows.Forms.ListBox();
             this.txtFullName = new System.Windows.Forms.TextBox();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
             this.lblFullName = new System.Windows.Forms.Label();
-            this.lblFirstName = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listUsers
@@ -53,13 +52,6 @@ namespace UserMaintenance
             this.txtFullName.Size = new System.Drawing.Size(165, 26);
             this.txtFullName.TabIndex = 1;
             // 
-            // txtFirstName
-            // 
-            this.txtFirstName.Location = new System.Drawing.Point(463, 154);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(165, 26);
-            this.txtFirstName.TabIndex = 2;
-            // 
             // lblFullName
             // 
             this.lblFullName.AutoSize = true;
@@ -69,18 +61,9 @@ namespace UserMaintenance
             this.lblFullName.TabIndex = 3;
             this.lblFullName.Text = "label1";
             // 
-            // lblFirstName
-            // 
-            this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(339, 154);
-            this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(51, 20);
-            this.lblFirstName.TabIndex = 4;
-            this.lblFirstName.Text = "label2";
-            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(389, 234);
+            this.btnAdd.Location = new System.Drawing.Point(389, 140);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(210, 65);
             this.btnAdd.TabIndex = 5;
@@ -88,15 +71,24 @@ namespace UserMaintenance
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(389, 231);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(210, 57);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "button1";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 450);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.lblFirstName);
             this.Controls.Add(this.lblFullName);
-            this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.listUsers);
             this.Name = "Form1";
@@ -110,10 +102,9 @@ namespace UserMaintenance
 
         private System.Windows.Forms.ListBox listUsers;
         private System.Windows.Forms.TextBox txtFullName;
-        private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label lblFullName;
-        private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
