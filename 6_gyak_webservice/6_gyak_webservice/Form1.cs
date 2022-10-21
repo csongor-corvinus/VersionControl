@@ -17,9 +17,11 @@ namespace _6_gyak_webservice
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
         public Form1()
         {
             InitializeComponent();
+            GetCurrencies();
             RefreshData();
         }
 
@@ -51,6 +53,8 @@ namespace _6_gyak_webservice
                 rate.Date = DateTime.Parse(element.GetAttribute("date"));
 
                 var childElement = (XmlElement)element.ChildNodes[0];
+                if (childElement == null)
+                    continue;
                 rate.Currency = childElement.GetAttribute("curr");
 
                 var unit = decimal.Parse(childElement.GetAttribute("unit"));
@@ -101,7 +105,35 @@ namespace _6_gyak_webservice
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedItem == null)
+            {
+                return;
+            }
             RefreshData();
+        }
+
+        private void GetCurrencies()
+        {
+            comboBox1.DataSource = Currencies;
+
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            var request = new GetCurrenciesRequestBody()
+            {
+            };
+
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                string currencies = element.InnerText;
+                for (int i = 0; i < currencies.Length; i+=3)
+                {
+                    Currencies.Add(currencies.Substring(i,3));
+                }
+            }
         }
     }
 }
