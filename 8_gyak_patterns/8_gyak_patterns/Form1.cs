@@ -32,18 +32,10 @@ namespace _8_gyak_patterns
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            Factory = new BallFactory { BallColor = btnBallColor.BackColor };
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
-        {
-            var toy = Factory.CreateNew();
-            _toys.Add(toy);
-            toy.Left = -toy.Width;
-            mainPanel.Controls.Add(toy);
-        }
-
-        private void createTimer_Tick(object sender, EventArgs e)
         {
             var maxPosition = 0;
             foreach (var toy in _toys)
@@ -61,6 +53,14 @@ namespace _8_gyak_patterns
             }
         }
 
+        private void createTimer_Tick(object sender, EventArgs e)
+        {
+            var toy = Factory.CreateNew();
+            _toys.Add(toy);
+            toy.Left = -toy.Width;
+            mainPanel.Controls.Add(toy);
+        }
+
         private void btnSelectCar_Click(object sender, EventArgs e)
         {
             Factory = new CarFactory();
@@ -68,7 +68,7 @@ namespace _8_gyak_patterns
 
         private void btnSelectBall_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory { BallColor = btnBallColor.BackColor };
         }
 
         private void DisplayNext()
@@ -81,7 +81,7 @@ namespace _8_gyak_patterns
             Controls.Add(_nextToy);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnBallColor_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var colorPicker = new ColorDialog();
