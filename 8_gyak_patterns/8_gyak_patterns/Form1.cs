@@ -91,5 +91,14 @@ namespace _8_gyak_patterns
                 return;
             button.BackColor = colorPicker.Color;
         }
+
+        private void btnSelectPresent_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                RibbonColor = btnRibbonColor.BackColor,
+                BoxColor = btnBoxColor.BackColor
+            };
+        }
     }
 }
