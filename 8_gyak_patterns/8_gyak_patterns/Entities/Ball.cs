@@ -16,11 +16,24 @@ namespace _8_gyak_patterns.Entities
         public Ball(Color color)
         {
             BallColor = new SolidBrush(color);
+            Click += Ball_Click;
         }
+
+        Random rnd = new Random();
+
+        private void Ball_Click(object sender, EventArgs e)
+        {
+            Color color1 = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            BallColor = new SolidBrush(color1);
+            Invalidate();
+        }
+
         protected override void DrawImage(Graphics g)
         {
             g.FillEllipse(BallColor, 0, 0, Width, Height);
         }
+
+        
     }
 
 }

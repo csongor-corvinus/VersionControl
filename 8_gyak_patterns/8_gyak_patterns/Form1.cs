@@ -78,6 +78,7 @@ namespace _8_gyak_patterns
             _nextToy = Factory.CreateNew();
             _nextToy.Top = lblNext.Top + lblNext.Height + 20;
             _nextToy.Left = lblNext.Left;
+            _nextToy.Enabled = false;
             Controls.Add(_nextToy);
         }
 
