@@ -42,7 +42,7 @@ namespace _7_gyak_mikroszimulacio
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 26);
+            this.label1.Location = new System.Drawing.Point(13, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 20);
             this.label1.TabIndex = 0;
@@ -50,7 +50,7 @@ namespace _7_gyak_mikroszimulacio
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(95, 23);
+            this.numericUpDown1.Location = new System.Drawing.Point(94, 30);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             2024,
             0,
@@ -73,7 +73,7 @@ namespace _7_gyak_mikroszimulacio
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(289, 23);
+            this.label2.Location = new System.Drawing.Point(289, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 20);
             this.label2.TabIndex = 2;
@@ -81,14 +81,14 @@ namespace _7_gyak_mikroszimulacio
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(410, 23);
+            this.textBox1.Location = new System.Drawing.Point(400, 26);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(369, 26);
             this.textBox1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(822, 17);
+            this.button1.Location = new System.Drawing.Point(790, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 35);
             this.button1.TabIndex = 4;
@@ -98,9 +98,9 @@ namespace _7_gyak_mikroszimulacio
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(932, 18);
+            this.button2.Location = new System.Drawing.Point(950, 21);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 34);
+            this.button2.Size = new System.Drawing.Size(104, 35);
             this.button2.TabIndex = 5;
             this.button2.Text = "Start";
             this.button2.UseVisualStyleBackColor = true;

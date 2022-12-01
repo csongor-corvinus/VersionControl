@@ -33,8 +33,8 @@ namespace _7_gyak_mikroszimulacio
             fiuk.Clear();
             lanyok.Clear();
             Population = GetPopulation(textBox1.Text);
-            BirthProbabilities = GetBirthProbabilities(@"C:\Users\Mikos Csongor\Downloads\mikroszimualcio\születés.csv");
-            DeathProbabilities = GetDeathProbabilities(@"C:\Users\Mikos Csongor\Downloads\mikroszimualcio\halál.csv");
+            BirthProbabilities = GetBirthProbabilities(@"C:\Users\Mikos Csongor\Downloads\mikroszimulacio\születés.csv");
+            DeathProbabilities = GetDeathProbabilities(@"C:\Users\Mikos Csongor\Downloads\mikroszimulacio\halál.csv");
 
             for (int year = 2005; year <= numericUpDown1.Value; year++)
             {
