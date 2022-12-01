@@ -17,13 +17,89 @@ namespace _7_gyak_mikroszimulacio
         List<Person> Population = new List<Person>();
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
+        Random rng = new Random(1234);
+        List<int> fiuk = new List<int>();
+        List<int> lanyok = new List<int>();
+
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopulation(@"C:\Users\Mikos Csongor\Downloads\mikroszimualcio\nép.csv");
+            
+        }
+
+        private void Simulation()
+        {
+            richTextBox1.Clear();
+            fiuk.Clear();
+            lanyok.Clear();
+            Population = GetPopulation(textBox1.Text);
             BirthProbabilities = GetBirthProbabilities(@"C:\Users\Mikos Csongor\Downloads\mikroszimualcio\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Users\Mikos Csongor\Downloads\mikroszimualcio\halál.csv");
-            dataGridView1.DataSource = DeathProbabilities;
+
+            for (int year = 2005; year <= numericUpDown1.Value; year++)
+            {
+                // Végigmegyünk az összes személyen
+                for (int i = 0; i < Population.Count; i++)
+                {
+                    SimStep(year, Population[i]);
+                }
+
+                int nbrOfMales = (from x in Population
+                                  where x.Gender == Gender.Male && x.IsAlive
+                                  select x).Count();
+                int nbrOfFemales = (from x in Population
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
+                fiuk.Add(nbrOfMales);
+                lanyok.Add(nbrOfFemales);
+            }
+
+            DisplayResults();
+        }
+
+        private void DisplayResults()
+        {
+
+            for (int i = 0; i < fiuk.Count; i++)
+            {
+                richTextBox1.AppendText("Szimulációs év: " + (2005 + i)+"\n\tFiúk: "+fiuk[i]+"\n\tLányok: "+lanyok[i]+"\n") ;
+            }
+        }
+
+        private void SimStep(int year, Person person)
+        {
+            //Ha halott akkor kihagyjuk, ugrunk a ciklus következő lépésére
+            if (!person.IsAlive) return;
+
+            // Letároljuk az életkort, hogy ne kelljen mindenhol újraszámolni
+            byte age = (byte)(year - person.BirthYear);
+
+            // Halál kezelése
+            // Halálozási valószínűség kikeresése
+            double pDeath = (from x in DeathProbabilities
+                             where x.Gender == person.Gender && x.Age == age
+                             select x.P).FirstOrDefault();
+            // Meghal a személy?
+            if (rng.NextDouble() <= pDeath)
+                person.IsAlive = false;
+
+            //Születés kezelése - csak az élő nők szülnek
+            if (person.IsAlive && person.Gender == Gender.Female)
+            {
+                //Szülési valószínűség kikeresése
+                double pBirth = (from x in BirthProbabilities
+                                 where x.Age == age
+                                 select x.P).FirstOrDefault();
+                //Születik gyermek?
+                if (rng.NextDouble() <= pBirth)
+                {
+                    Person újszülött = new Person();
+                    újszülött.BirthYear = year;
+                    újszülött.NbrOfChildren = 0;
+                    újszülött.Gender = (Gender)(rng.Next(1, 3));
+                    Population.Add(újszülött);
+                }
+            }
         }
 
         public List<Person> GetPopulation(string csvpath)
@@ -79,15 +155,33 @@ namespace _7_gyak_mikroszimulacio
                     var line = sr.ReadLine().Split(';');
                     deathprobabilities.Add(new DeathProbability()
                     {
-                        Age = int.Parse(line[0]),
+                        Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
 
-                        NbrOfChildren = int.Parse(line[1]),
+                        Age = int.Parse(line[1]),
                         P = double.Parse(line[2])
                     });
                 }
             }
 
             return deathprobabilities;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Simulation();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "CSV Files (*.csv)|*.csv";
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            textBox1.Text = ofd.FileName;
+
         }
     }
 }
