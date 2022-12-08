@@ -21,6 +21,9 @@ namespace _10_gyak_evolucios_algoritmus
 
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
+
+            gc.AddPlayer();
+            gc.Start(true);
         }
     }
 }
