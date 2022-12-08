@@ -123,15 +123,18 @@ namespace _6_gyak_webservice
 
             var response = mnbService.GetCurrencies(request);
             var result = response.GetCurrenciesResult;
+            MessageBox.Show(result);
             var xml = new XmlDocument();
             xml.LoadXml(result);
 
             foreach (XmlElement element in xml.DocumentElement)
             {
-                string currencies = element.InnerText;
-                for (int i = 0; i < currencies.Length; i+=3)
+                foreach (XmlElement inner_element in element)
                 {
-                    Currencies.Add(currencies.Substring(i,3));
+                    
+                    string currencie = inner_element.InnerText;
+                    Currencies.Add(currencie);
+
                 }
             }
         }
