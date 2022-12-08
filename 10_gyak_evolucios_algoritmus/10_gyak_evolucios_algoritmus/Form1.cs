@@ -27,7 +27,7 @@ namespace _10_gyak_evolucios_algoritmus
             label1.BringToFront();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
-
+            button1.Visible = false;
             gc.GameOver += Gc_GameOver;
 
             for (int i = 0; i < populationSize; i++)
@@ -55,6 +55,7 @@ namespace _10_gyak_evolucios_algoritmus
                           select p;
             if (winners.Count() > 0)
             {
+                button1.Visible = true;
                 winnerBrain = winners.FirstOrDefault().Brain.Clone();
                 gc.GameOver -= Gc_GameOver;
                 return;
@@ -75,6 +76,15 @@ namespace _10_gyak_evolucios_algoritmus
                     gc.AddPlayer(b.Mutate());
             }
             gc.Start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gc.ResetCurrentLevel();
+            gc.AddPlayer(winnerBrain.Clone());
+            gc.AddPlayer();
+            ga.Focus();
+            gc.Start(true);
         }
     }
 }
